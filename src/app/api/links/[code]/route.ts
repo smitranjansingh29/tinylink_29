@@ -6,7 +6,7 @@ export async function GET(
   { params }: { params: { code: string } }
 ) {
   try {
-    const { code } = params;
+    const { code } = await params;
 
     const result = await sql`
       SELECT code, target_url, clicks, last_clicked_at, created_at 
@@ -36,7 +36,7 @@ export async function DELETE(
   { params }: { params: { code: string } }
 ) {
   try {
-    const { code } = params;
+    const { code } = await params;
 
     const result = await sql`
       DELETE FROM links 
