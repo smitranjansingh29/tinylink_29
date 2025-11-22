@@ -6,7 +6,7 @@ export async function GET(
   { params }: { params: { code: string } }
 ) {
   try {
-    const { code } = params;
+    const { code } = await params;
 
     const result = await sql`
       SELECT target_url FROM links WHERE code = ${code}
