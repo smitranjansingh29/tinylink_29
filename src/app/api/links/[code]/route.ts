@@ -3,10 +3,10 @@ import { sql } from '../../../../../lib/db';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { code: string } }
+  { params }: { params: Promise<{ code: string }> }
 ) {
   try {
-    const { code } = await params;
+    const { code } = await params; // ← AWAIT the params
 
     const result = await sql`
       SELECT code, target_url, clicks, last_clicked_at, created_at 
@@ -33,10 +33,10 @@ export async function GET(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { code: string } }
+  { params }: { params: Promise<{ code: string }> }
 ) {
   try {
-    const { code } = await params;
+    const { code } = await params; // ← AWAIT the params
 
     const result = await sql`
       DELETE FROM links 
