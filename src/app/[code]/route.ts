@@ -1,12 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { sql } from '../../../lib/db';
 
+
 export async function GET(
   request: NextRequest,
-  { params }: { params: { code: string } }
+  { params }: { params: Promise<{ code: string }> }
 ) {
   try {
-    const { code } = await params;
+    const { code } = await params; // ← AWAIT the params
 
     const result = await sql`
       SELECT target_url FROM links WHERE code = ${code}
