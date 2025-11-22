@@ -1,14 +1,13 @@
 import { notFound } from 'next/navigation';
 import Header from '../../../../components/Header';
 
+
 interface PageProps {
-  params: {
-    code: string;
-  };
+  params: Promise<{ code: string }>; // ← Add Promise wrapper
 }
 
 export default async function StatsPage({ params }: PageProps) {
-  const { code } = params;
+  const { code } = await params; // ← AWAIT the params
 
   let linkData = null;
   try {
